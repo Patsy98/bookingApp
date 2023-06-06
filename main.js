@@ -17,6 +17,6 @@ var User ={
 };
 
 var json= JSON.stringify(User);
-localStorage.setItem(User,json);
+localStorage.setItem(mail,json);
 console.log('user added');
 }
