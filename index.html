@@ -13,12 +13,12 @@
     </header>
 
     <section class="container">
-      <form id="my-form">
+      <form id="my-form" onsubmit="signUp()">
         <h1>Add User</h1>
         <div class="msg"></div>
         <div>
           <label for="name">Name:</label>
-          <input type="text" id="name">
+          <input type="text" id="Username">
         </div>
         <div>
           <label for="email">Email:</label>
@@ -32,8 +32,9 @@
             <label for="time">Time:</label>
             <input type="time" id="time">
         </div>
-        <input class="btn" type="submit" value="Submit" onclick="test()">
+        <input class="btn" type="submit" value="Submit">
       </form>
+
 
       <ul id="users"></ul>
 
@@ -43,7 +44,19 @@
         <li class="item">Item 3</li>
       </ul> -->
     </section>
-    
+    <script>
+      var form = document.querySelector('form');
+
+form.addEventListener('submit',(e) =>{
+
+    e.preventDefault();
+    const fd=new FormData(form);
+    const obj=Object.fromEntries(fd);
+
+    const json=JSON.stringify(obj);
+    localStorage.setItem('form',json);
+})
+    </script>
 
     <script src="main.js"></script>
   </body>

@@ -1,14 +1,22 @@
-function test(){
-//retriving the data
-var uid= document.getElementById("name").value;
+
+function signUp(e){
+event.preventDefault();
+//console.log("working");
+
+var userName=document.getElementById("Username").value;
 var mail=document.getElementById("email").value;
 var dates=document.getElementById("date").value;
-var clock=document.getElementById("time").value;
+var times=document.getElementById("time").value;
 
-//storing the data
-var user=localStorage.setItem("Name",uid);
-var mailid=localStorage.setItem("Email",mail);
-var day=localStorage.setItem("Date",dates);
-var timing =localStorage.setItem("Time",clock);
+var User ={
+    UserName : userName ,
+    Email : mail ,
+    Date : dates ,
+    Time : times ,
 
+};
+
+var json= JSON.stringify(User);
+localStorage.setItem(User,json);
+console.log('user added');
 }
