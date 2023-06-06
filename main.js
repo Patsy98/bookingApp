@@ -13,7 +13,7 @@ var User ={
     Email : mail ,
     Date : dates ,
     Time : times ,
-
+  
 };
 
 var json= JSON.stringify(User);
