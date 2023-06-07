@@ -64,7 +64,24 @@
             parentElem.removeChild(childElem);
 
           }
+          
+           const editBtn=document.createElement('input');
+          editBtn.type="button";
+          editBtn.value="Edit";
+          editBtn.onclick = () =>{
+            localStorage.removeItem(obj.mailid);
+            parentElem.removeChild(childElem);
+            document.getElementById("userNameInputTag")=obj.name;
+            document.getElementById("emailInputTag")=obj.mailid;
+            document.getElementById("dateInputTag")=obj.dates;
+            document.getElementById("timeInputTag")=obj.timing;
+
+
+          }
+          
+          
           childElem.appendChild(deleteBtn);
+          childElem.appendChild(editBtn);
           parentElem.appendChild(childElem);
 
 
