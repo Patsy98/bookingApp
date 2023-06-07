@@ -12,52 +12,75 @@
       <h1>Booking Appointment</h1>
     </header>
 
-    <section class="container">
-      <form id="my-form" onsubmit="signUp()">
-        <h1>Add User</h1>
-        <div class="msg"></div>  
-        <div>
+    
+      <form onsubmit="saveToLocalStorage(event)" >
           <label for="name">Name:</label>
-          <input type="text" id="Username">
-        </div>
-        <div>
+          <input type="text" id="Username" required>
+      
           <label for="email">Email:</label>
-          <input type="text" id="email">
-        </div>
-        <div>
+          <input type="email" id="email">
+       
             <label for="date">Date:</label>
             <input type="date" id="date">
-        </div>
-        <div>
+        
             <label for="time">Time:</label>
             <input type="time" id="time">
-        </div>
-        <input class="btn" type="submit" value="Submit">
+        
+        <button>Submit</button>
+        
       </form>
+            <ul id="listOfItems"></ul>
+
+      <script>
+        function saveToLocalStorage(event){
+          event.preventDefault();
+          const name=event.target.Username.value;
+          const mailid=event.target.email.value;
+          const dates=event.target.date.value;
+          const timing=event.target.time.value;
+
+          const obj={
+            name,
+            mailid,
+            dates,
+            timing
+          }
+          localStorage.setItem(obj.mailid,JSON.stringify(obj))
+          showUserOnScreen(obj);
+        }
+
+        function showUserOnScreen(obj){
+          const parentElem=document.getElementById("listOfItems");
+          const childElem=document.createElement("li");
+          childElem.textContent=obj.name +' - ' + obj.mailid + ' - ' + obj.dates + ' - ' + obj.timing;
 
 
-      <ul id="users"></ul>
 
-      <!-- <ul class="items">
-        <li class="item">Item 1</li>
-        <li class="item">Item 2</li>
-        <li class="item">Item 3</li>
-      </ul> -->
-    </section>
-    <script>
-      var form = document.querySelector('form');
+          const deleteBtn=document.createElement('input');
+          deleteBtn.type="button";
+          deleteBtn.value="Delete";
+          deleteBtn.onclick = () =>{
+            localStorage.removeItem(obj.mailid);
+            parentElem.removeChild(childElem);
 
-form.addEventListener('submit',(e) =>{
+          }
+          childElem.appendChild(deleteBtn);
+          parentElem.appendChild(childElem);
 
-    e.preventDefault();
-    const fd=new FormData(form);
-    const obj=Object.fromEntries(fd);
 
-    const json=JSON.stringify(obj);
-    localStorage.setItem('form',json);
-})
-    </script>
 
-    <script src="main.js"></script>
+        
+
+
+        }
+
+      </script>
+
+
+     
+    
+    
+
+   
   </body>
 </html>
