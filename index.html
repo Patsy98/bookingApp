@@ -12,39 +12,92 @@
       <h1>Booking Appointment</h1>
     </header>
 
-    <section class="container">
-      <form id="my-form">
-        <h1>Add User</h1>
-        <div class="msg"></div>
-        <div>
+    
+      <form onsubmit="saveToLocalStorage(event)" >
           <label for="name">Name:</label>
-          <input type="text" id="name">
-        </div>
-        <div>
+          <input type="text" id="Username" required>
+      
           <label for="email">Email:</label>
-          <input type="text" id="email">
-        </div>
-        <div>
+          <input type="email" id="email">
+       
             <label for="date">Date:</label>
             <input type="date" id="date">
-        </div>
-        <div>
+        
             <label for="time">Time:</label>
             <input type="time" id="time">
-        </div>
-        <input class="btn" type="submit" value="Submit" onclick="test()">
+        
+        <button>Submit</button>
+        
       </form>
+            <ul id="listOfItems"></ul>
 
-      <ul id="users"></ul>
+      <script>
+        function saveToLocalStorage(event){
+          event.preventDefault();
+          const name=event.target.Username.value;
+          const mailid=event.target.email.value;
+          const dates=event.target.date.value;
+          const timing=event.target.time.value;
 
-      <!-- <ul class="items">
-        <li class="item">Item 1</li>
-        <li class="item">Item 2</li>
-        <li class="item">Item 3</li>
-      </ul> -->
-    </section>
+          const obj={
+            name,
+            mailid,
+            dates,
+            timing
+          }
+          localStorage.setItem(obj.mailid,JSON.stringify(obj))
+          showUserOnScreen(obj);
+        }
+
+        function showUserOnScreen(obj){
+          const parentElem=document.getElementById("listOfItems");
+          const childElem=document.createElement("li");
+          childElem.textContent=obj.name +' - ' + obj.mailid + ' - ' + obj.dates + ' - ' + obj.timing;
+
+
+
+          const deleteBtn=document.createElement('input');
+          deleteBtn.type="button";
+          deleteBtn.value="Delete";
+          deleteBtn.onclick = () =>{
+            localStorage.removeItem(obj.mailid);
+            parentElem.removeChild(childElem);
+
+          }
+          
+           const editBtn=document.createElement('input');
+          editBtn.type="button";
+          editBtn.value="Edit";
+          editBtn.onclick = () =>{
+            localStorage.removeItem(obj.mailid);
+            parentElem.removeChild(childElem);
+            document.getElementById("userNameInputTag")=obj.name;
+            document.getElementById("emailInputTag")=obj.mailid;
+            document.getElementById("dateInputTag")=obj.dates;
+            document.getElementById("timeInputTag")=obj.timing;
+
+
+          }
+          
+          
+          childElem.appendChild(deleteBtn);
+          childElem.appendChild(editBtn);
+          parentElem.appendChild(childElem);
+
+
+
+        
+
+
+        }
+
+      </script>
+
+
+     
+    
     
 
-    <script src="main.js"></script>
+   
   </body>
 </html>
